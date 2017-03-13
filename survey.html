@@ -1,0 +1,81 @@
+<html>
+<head></head>
+
+<body>
+
+   <br/><br/><br/><br/>
+
+   <div class='question'>
+      <div>Phone number?</div>
+
+      <input class='text-input' type='text'></input>
+      <button
+   </div>
+
+
+   <div class='question question-inactive'>
+      <div>Phone number?</div>
+
+      <input class='text-input' type='text'></input>
+   </div>
+
+
+   <style>
+      .question {
+         padding-top: 80px;
+      }
+      .question-inactive {
+         opacity: 0.6;
+      }
+
+   </style>
+
+   <script>
+
+
+      /*types:
+            yes-no
+            text
+            number
+            multiple-choice
+         options: ['asdf', 'sdf', 'adsf']
+
+      */
+
+      var questions = [
+         {
+            'question': 'Your age?',
+            'type': 'number',
+         },
+         {
+            'question': 'Are you married?',
+            'type' : 'yes-no'
+         },
+         {
+            'question' : 'Do you have children?',
+            'type': 'yes-no'
+         },
+         {
+            'question' : 'Extra details',
+            'type' : 'text'
+         }
+      ];
+
+      var configData = {};
+
+      function newSurvey(contId, questionList, configDate) {
+
+         var app = new Vue({
+            el: '#' + contId,
+            data: {
+               questions: questionList
+            }
+         });
+
+
+      }
+
+   </script>
+
+</body>
+</html>

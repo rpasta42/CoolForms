@@ -1,0 +1,147 @@
+<html>
+<head>
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+   <script src='https://unpkg.com/vue/dist/vue.js'></script>
+</head>
+
+   <style>
+
+      #page-cont {
+         width: 80%;
+         position: absolute;
+         left: 50%;
+         transform: translateX(-50%);
+      }
+
+      body {
+         background-color: #f4f4f4;
+      }
+
+      #snap-target {
+         border-style:  dotted;
+         border-width:  5px;
+         border-color:  #ccc;
+         border-radius: 5px;
+         height:        200px;
+         width:         200px;
+      }
+
+      #form-options {
+         border-width: 1px;
+         border-style: solid;
+
+         float: left;
+         height: 100%;
+         width: 200px;
+      }
+
+      #form-builder {
+         border-width: 1px;
+         border-style: solid;
+
+
+         height: 100%;
+         float: right;
+      }
+   </style>
+
+<body>
+
+<div id='page-cont'>
+
+   <div id='form-options'>
+      <div class='form-option' id='form-input-text'>
+         <!--<input disabled type='text'></input>-->
+         this will be text input (drag me)
+      </div>
+
+      <div class='form-option' id='form-input-checkbox'>
+         <!-- <input disabled=true type='checkbox'></input> -->
+         this will be checkbox input (drag me)
+      </div>
+
+   </div>
+
+   <div id='form-builder'>
+      <div id='app'>
+         <div v-html='rawHtml'>
+            {{message}}
+         </div>
+      </div>
+
+      Form
+      <div id='snap-target'>
+
+      </div>
+   </div>
+
+</div>
+
+
+
+<script>
+
+   //$( "#app" ).draggable({ snap: "#snap-target", cursor:"move" });
+
+   $('#snap-target').droppable({
+      //accept: '.form-option'
+      accept: function(el) {
+         console.log('accept');
+         if (el.hasClass('form-option'))
+            return true;
+         else return false;
+      }
+   });
+
+   $('.form-option').draggable({
+      snap: '#snap-target',
+      cursor: 'move',
+      appendTp: 'body',
+      revert: 'invalid', //true,
+      snapMode: 'inner',
+      snapTolerance: 30,
+      containment: 'window',
+      drag: function(event, ui) {
+
+         //ui.position.left = Math.min(100, ui.position.left);
+      },
+      start: function() {
+
+
+      },
+      stop: function() {
+
+      },
+      drop: function(event, ui) {
+         console.log(ui.draggable.is('.correct'));
+         console.log('hi');
+         //console.log($(this).
+      }
+   });
+
+
+   function startVueApp() {
+      var app = new Vue({
+         el : '#app',
+         data: {
+            message: 'initial message'
+         }
+      });
+
+      function f(i) {
+         app.message = '<input type="checkbox"></input> counter:' + i + ' date:' + new Date();
+
+         setTimeout(function() {
+            f(++i);
+         }, 1000*i);
+      }
+
+      f(0);
+   }
+   //startVueApp();
+
+</script>
+
+</body>
+</html>
